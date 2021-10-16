@@ -1,7 +1,8 @@
 # InfluxDB custom component for ESPHome
+Credit goes to la7dja @ https://github.com/la7dja for this great template. I sued his existing UDP version to use the ESPHome http_request module.
 
 This custom component allows you to send sensor updates from ESPHome to an
-InfluxDB database with UDP.
+InfluxDB database<del>with UDP</del>.
 
 
 ## Installation
@@ -10,7 +11,7 @@ Clone this repository into `custom_components/influxdb` from the directory
 where your ESPHome configuration is stored.
 
 ```bash
-git clone https://github.com/la7dja/esphome-influxdb custom_components/influxdb
+git clone https://github.com/jabastien/esphome-influxdb custom_components/influxdb
 ```
 
 ## Usage
@@ -22,6 +23,10 @@ Add `influxdb` section to your ESPHome configuration file.
 ```yaml
 influxdb:
   host: "influxdb-host"
+  database: "$(devicename)_db"
+  username: !secret influxdb_user
+  password: !secret influxdb_pass
+  
   sensors:
     meter_id:
       ignore: True
@@ -34,9 +39,12 @@ influxdb:
 ### Configuration variables
 
 * **host** (Required, string): Hostname or IP for the InfluxDB server
-* **port** (Optional, int): Port number the InfluxDB server is listening on. Defaults to 8089.
-* **max\_packet_size** (Optional, int): Max size of UDP packets. Defaults to 500.
-* **send_timeout** (Optional, time): Time to wait before sending UDP packets which have not been filled to max size. Defaults to 100ms.
+* **port** (Optional, int): Port number the InfluxDB server is listening on. Defaults to <del>8089</del> 8086.
+* **username** (Optional, string): Username for InfluxDB Authentication
+* **password** (Optional, string): Password for InfluxDB Authentication
+* **database** (Optional, default = 'esphome'): Auto create Database if does not exist.
+* <del>**max\_packet_size** (Optional, int): Max size of UDP packets. Defaults to 500.</del>
+* <del>**send_timeout** (Optional, time): Time to wait before sending UDP packets which have not been filled to max size. Defaults to 100ms.</del>
 * **publish_all** (Optional, boolean): If true publish updates from all sensors unless explicit ignored in per sensor configuration. If false only publish updates from sensors explicit configured. Defaults to True.
 * **tags** (Optional, mapping): Mapping of tag keys and values. Defaults to 'node: <esphome.name>'.
 * **sensors** (Optional, mapping): Per sensor configuration. Keys are sensor IDs. All types of sensors are included in this mapping, there is no distinquin bettwi float, binary and text sensors.
