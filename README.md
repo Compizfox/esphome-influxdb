@@ -1,5 +1,5 @@
 # InfluxDB custom component for ESPHome
-Credit goes to la7dja @ https://github.com/la7dja for this great template. I sued his existing UDP version to use the ESPHome http_request module.
+Credit goes to la7dja @ https://github.com/la7dja for this great template. I used his existing UDP version to use the ESPHome http_request module.
 
 This custom component allows you to send sensor updates from ESPHome to an
 InfluxDB database<del>with UDP</del>.
@@ -45,12 +45,14 @@ influxdb:
 * **database** (Optional, default = 'esphome'): Auto create Database if does not exist.
 * <del>**max\_packet_size** (Optional, int): Max size of UDP packets. Defaults to 500.</del>
 * <del>**send_timeout** (Optional, time): Time to wait before sending UDP packets which have not been filled to max size. Defaults to 100ms.</del>
-* **publish_all** (Optional, boolean): If true publish updates from all sensors unless explicit ignored in per sensor configuration. If false only publish updates from sensors explicit configured. Defaults to True.
+* **publish_all** (Optional, boolean): If true, publish updates from all sensors unless explicitly ignored in per sensor configuration. If false, only publish updates from sensors explicitly configured. Defaults to True.
 * **tags** (Optional, mapping): Mapping of tag keys and values. Defaults to 'node: <esphome.name>'.
-* **sensors** (Optional, mapping): Per sensor configuration. Keys are sensor IDs. All types of sensors are included in this mapping, there is no distinquin bettwi float, binary and text sensors.
+* **sensors** (Optional, mapping): Per sensor configuration. Keys are sensor IDs. All types of sensors are included in this mapping, there is no distinction between float, binary and text sensors.
 
 #### Sensor configuration variables
 
 * **ignore** (Optional, boolean): Whether or not to include updates for this sensor. Defaults to True.
 * **measurement** (Optional, string): Name of measurements with update from this sensor. Defaults to the sanitized name of the sensor.
 * **tags** (Optional, mapping): Additional tags added for this sensor.
+
+
