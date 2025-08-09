@@ -6,7 +6,7 @@
 #include "esphome/core/defines.h"
 #include "esphome/core/log.h"
 
-#include "esphome/components/http_request/http_request.h"
+#include "esphome/components/http_request/http_request_arduino.h"
 
 namespace esphome {
 	namespace influxdb {
@@ -43,6 +43,7 @@ namespace esphome {
 			std::string database;
 			std::string measurement;
 			std::string service_url;
+			std::list<http_request::Header> headers;
 
 			int send_timeout;
 			std::string tags;
@@ -50,7 +51,7 @@ namespace esphome {
 
 			std::vector<std::function<EntityBase * ()>> setup_callbacks;
 
-			http_request::HttpRequestComponent *request_;
+			http_request::HttpRequestArduino *request_;
 		};
 
 	} // namespace influxdb
